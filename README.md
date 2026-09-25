@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vibe — pilot web app (PWA)
 
-## Getting Started
+Islamabad-first discovery app: members set preferences and get place and event picks that explain themselves; partners submit events; a city editor reviews and publishes them. The product and engineering plans live in [`docs/`](docs/).
 
-First, run the development server:
+This build implements the blueprint's **first vertical slice** (§16) as a front-end prototype:
+
+1. A member chooses Islamabad and sets interests, sector, distance, budget and analytics consent (`/onboarding`).
+2. Discovery ranks fictional listings with the deterministic engine from blueprint §9 — hard filters, weighted score, category diversity, and 2–3 plain-language reasons per pick (`/discover`). Members can save picks or hide them with “Not for me” (undo is available).
+3. A partner drafts an event with one session and submits it (`/partner`).
+4. A city editor approves, then publishes or rejects it (`/console`). The published event shows up in members' picks.
+5. Consented impressions, saves and hides are logged using the blueprint §11 event envelope and shown in the console.
+
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm test           # engine acceptance checks (node:test)
+npm run typecheck
+npm run lint
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The service worker only registers in production builds (`npm run build && npm start`).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Next.js 16 (App Router, React Compiler) · TypeScript strict · Tailwind CSS v4 · Motion (scroll/layout animation) · Lenis (smooth scroll) · React Three Fiber + drei (3D hero) · Zod (submission validation) · lucide-react.
 
-## Learn More
+## Where things live
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/app/                 routes: landing, (app)/discover|saved|partner|console|onboarding, manifest, offline
+src/components/landing/  marketing page sections; CityScene.tsx is the 3D Islamabad sector grid
+src/components/app/      member, partner and console UI
+src/lib/engine.ts        time windows, distance, ranking, reason codes (pure; tested in engine.test.mjs)
+src/lib/data.ts          fictional Islamabad fixtures (city config, venues, events)
+src/lib/store.ts         localStorage-backed store standing in for the /v1 API; event state machine
+src/lib/format.ts        money, time and reason formatting at the display boundary
+public/sw.js             offline caching
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Not built yet (by design)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **No backend.** Everything is stored in the browser. `src/lib/store.ts` is the seam where `/v1` API calls go. The partner/editor role checks there are a demo of the policy, **not authorization**.
+- No authentication, payments, tickets, check-in, ledger, moderation cases or notifications. The docs schedule these for the transaction pilot, and the "Get tickets" button stays disabled until then.
+- Pricing on the landing page shows the plan's pilot **test** prices.
+- All listings and organizations are fictional.

@@ -1,26 +1,158 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/*
+ * "Margalla dusk" tokens: the city's sodium streetlights and violet ridge at sunset,
+ * over a night-indigo base rather than neutral black.
+ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: #0b0d2a;
+  --color-ink-2: #11143a;
+  --color-ridge: #171b4b;
+  --color-ridge-2: #222866;
+  --color-jasmine: #f5f3ff;
+  --color-haze: #a3a8d8;
+  --color-sodium: #ffb547;
+  --color-dusk: #ff6f7d;
+  --color-pine: #43e0b0;
+  --color-violet: #8c7bff;
+  --color-line: rgb(163 168 216 / 0.16);
+
+  --font-display: var(--font-anybody);
+  --font-sans: var(--font-figtree);
+  --font-mono: var(--font-plex-mono);
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-marquee-reverse: marquee 44s linear infinite reverse;
+  --animate-grid-drift: grid-drift 3.5s linear infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
   }
 }
 
+@keyframes grid-drift {
+  to {
+    background-position: 0 64px;
+  }
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  background: var(--color-ink);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-ink);
+  color: var(--color-jasmine);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-sodium);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-sodium);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@layer components {
+  /* Utility face for sector codes, times and system labels. */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-haze);
+  }
+
+  /* Islamabad's sector grid, used as a quiet texture wherever the map motif appears. */
+  .sector-grid {
+    background-image:
+      linear-gradient(var(--color-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .glass {
+    background: rgb(23 27 75 / 0.55);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid var(--color-line);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    padding: 0.8rem 1.35rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .btn:active {
+    transform: scale(0.97);
+  }
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .btn-primary {
+    background: var(--color-sodium);
+    color: var(--color-ink);
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: #ffc670;
+  }
+  .btn-ghost {
+    border: 1px solid var(--color-line);
+    color: var(--color-jasmine);
+  }
+  .btn-ghost:hover:not(:disabled) {
+    border-color: rgb(245 243 255 / 0.4);
+    background: rgb(245 243 255 / 0.04);
+  }
+
+  .field {
+    width: 100%;
+    border-radius: 0.9rem;
+    border: 1px solid var(--color-line);
+    background: var(--color-ink-2);
+    padding: 0.75rem 0.95rem;
+    color: var(--color-jasmine);
+    transition: border-color 0.2s ease;
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--color-sodium);
+  }
+  .field[aria-invalid="true"] {
+    border-color: var(--color-dusk);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
