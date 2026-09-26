@@ -3,8 +3,8 @@ import type { MetadataRoute } from "next";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     id: "/",
-    name: "Vibe — Find your people, places and plans",
-    short_name: "Vibe",
+    name: "Wibe — Find your people, places and plans",
+    short_name: "Wibe",
     description: "Personal, explainable picks for places and events in Islamabad.",
     start_url: "/discover",
     scope: "/",

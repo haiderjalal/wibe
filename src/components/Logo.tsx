@@ -5,11 +5,11 @@ export function Logo({ href = "/", className = "" }: { href?: string; className?
   return (
     <Link
       href={href}
-      aria-label="Vibe home"
+      aria-label="Wibe home"
       className={`font-display text-2xl font-extrabold lowercase tracking-tight ${className}`}
       style={{ fontVariationSettings: '"wdth" 130' }}
     >
-      vibe<span className="text-sodium">.</span>
+      wibe<span className="text-sodium">.</span>
     </Link>
   );
 }

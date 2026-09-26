@@ -1,6 +1,6 @@
-// Vibe service worker: cache-first for hashed build assets, network-first for pages with an offline fallback.
+// Wibe service worker: cache-first for hashed build assets, network-first for pages with an offline fallback.
 // All member data lives in localStorage, so cached app pages keep working offline.
-const VERSION = "vibe-v1";
+const VERSION = "wibe-v1";
 const OFFLINE_URL = "/offline";
 const PRECACHE = [OFFLINE_URL, "/discover", "/saved", "/icons/icon-192.png"];
 

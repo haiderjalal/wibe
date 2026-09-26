@@ -1,5 +1,5 @@
 /**
- * Domain types mirroring the Vibe developer blueprint (docs/Vibe_Developer_Blueprint.md §5).
+ * Domain types mirroring the Wibe developer blueprint (docs/Vibe_Developer_Blueprint.md §5).
  * Money is stored as integer minor units plus the city's ISO currency; timestamps are UTC ISO strings.
  */
 

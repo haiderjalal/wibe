@@ -40,7 +40,7 @@ export function ReasonsShowcase() {
           </h2>
           <Reveal delay={0.2}>
             <p className="mt-6 max-w-md text-lg leading-relaxed text-haze">
-              Vibe ranks what’s open, affordable and close to you, then tells you which of those reasons put each pick on your list. If one misses,
+              Wibe ranks what’s open, affordable and close to you, then tells you which of those reasons put each pick on your list. If one misses,
               tap <span className="text-jasmine">Not for me</span> and it’s gone.
             </p>
           </Reveal>

@@ -11,7 +11,7 @@ import { CATEGORIES } from "@/lib/categories";
 import { CITIES, ISLAMABAD, neighborhood } from "@/lib/data";
 import { isOpenAt, recommend } from "@/lib/engine";
 import { formatDay, formatMoney, formatTime, formatVerified, reasonLabel } from "@/lib/format";
-import { useCatalog, useVibe, vibe } from "@/lib/store";
+import { useCatalog, useWibe, wibe } from "@/lib/store";
 import type { City, Item } from "@/lib/types";
 
 const WEEKDAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -43,7 +43,7 @@ function ParallaxCover({ item }: { item: Item }) {
 }
 
 export function ItemDetail({ id }: { id: string }) {
-  const { ready, prefs, saves } = useVibe();
+  const { ready, prefs, saves } = useWibe();
   const catalog = useCatalog();
   const [now] = useState(() => new Date());
 
@@ -95,7 +95,7 @@ export function ItemDetail({ id }: { id: string }) {
               {item.title}
             </motion.h1>
           </div>
-          <SaveButton saved={saved} onToggle={() => vibe.toggleSave(item.id)} label={item.title} className="relative !size-12 shrink-0" />
+          <SaveButton saved={saved} onToggle={() => wibe.toggleSave(item.id)} label={item.title} className="relative !size-12 shrink-0" />
         </div>
       </div>
 

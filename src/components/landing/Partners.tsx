@@ -19,7 +19,7 @@ const FEATURES = [
   {
     icon: ChartColumn,
     title: "Attribution you can reconcile",
-    body: "See which bookings and visits came through Vibe, in a report that matches your invoice line for line.",
+    body: "See which bookings and visits came through Wibe, in a report that matches your invoice line for line.",
   },
   {
     icon: ScanLine,

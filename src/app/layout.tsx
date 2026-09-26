@@ -14,15 +14,15 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: "Vibe — Find your people, places and plans", template: "%s · Vibe" },
+  title: { default: "Wibe — Find your people, places and plans", template: "%s · Wibe" },
   description:
-    "Vibe recommends places, events and hosted experiences in Islamabad, and tells you why each one made your list.",
-  applicationName: "Vibe",
-  appleWebApp: { capable: true, title: "Vibe", statusBarStyle: "black-translucent" },
+    "Wibe recommends places, events and hosted experiences in Islamabad, and tells you why each one made your list.",
+  applicationName: "Wibe",
+  appleWebApp: { capable: true, title: "Wibe", statusBarStyle: "black-translucent" },
   openGraph: {
     type: "website",
-    siteName: "Vibe",
-    title: "Vibe — Find your people, places and plans",
+    siteName: "Wibe",
+    title: "Wibe — Find your people, places and plans",
     description: "Personal, explainable picks for what to do in Islamabad tonight.",
   },
   twitter: { card: "summary_large_image" },

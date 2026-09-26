@@ -106,7 +106,7 @@ export function Hero() {
           transition={{ duration: 0.9, delay: 1.1, ease: EASE }}
         >
           <p className="max-w-md text-lg leading-relaxed text-haze">
-            Vibe picks places, events and hosted experiences around you, and shows exactly why each one made your list.
+            Wibe picks places, events and hosted experiences around you, and shows exactly why each one made your list.
           </p>
           <div className="flex flex-wrap gap-3">
             <Link href="/onboarding" className="btn btn-primary group">

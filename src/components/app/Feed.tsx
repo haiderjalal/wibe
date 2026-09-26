@@ -10,7 +10,7 @@ import { Toast, type ToastMessage } from "@/components/app/Toast";
 import { CITIES, ISLAMABAD, neighborhood } from "@/lib/data";
 import { recommend } from "@/lib/engine";
 import { formatMoney } from "@/lib/format";
-import { useCatalog, useVibe, vibe } from "@/lib/store";
+import { useCatalog, useWibe, wibe } from "@/lib/store";
 import type { Category, Intent, Item, Preferences } from "@/lib/types";
 
 const INTENTS: { id: Intent; label: string; heading: string }[] = [
@@ -39,7 +39,7 @@ export function FeedSkeleton() {
 }
 
 export function Feed() {
-  const { ready, prefs, saves, hidden } = useVibe();
+  const { ready, prefs, saves, hidden } = useWibe();
   const catalog = useCatalog();
 
   if (!ready) return <FeedSkeleton />;
@@ -71,14 +71,14 @@ function FeedResults({ prefs, catalog, saves, hidden }: { prefs: Preferences; ca
   const current = INTENTS.find((i) => i.id === intent) ?? INTENTS[1];
 
   useEffect(() => {
-    vibe.logImpression(requestId, recs.map((r) => r.item.id));
+    wibe.logImpression(requestId, recs.map((r) => r.item.id));
     // requestId already encodes the result ids.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [requestId]);
 
   const hide = (item: Item, position: number) => {
-    vibe.hide(item.id, { requestId, position });
-    setToast({ id: `${item.id}-${hidden.length}`, text: `Hidden ${item.title}.`, action: { label: "Undo", onClick: () => vibe.unhide(item.id) } });
+    wibe.hide(item.id, { requestId, position });
+    setToast({ id: `${item.id}-${hidden.length}`, text: `Hidden ${item.title}.`, action: { label: "Undo", onClick: () => wibe.unhide(item.id) } });
   };
 
   return (
@@ -153,7 +153,7 @@ function FeedResults({ prefs, catalog, saves, hidden }: { prefs: Preferences; ca
                   prefs={prefs}
                   now={now}
                   saved={saves.includes(rec.item.id)}
-                  onToggleSave={() => vibe.toggleSave(rec.item.id, { requestId, position })}
+                  onToggleSave={() => wibe.toggleSave(rec.item.id, { requestId, position })}
                   onHide={() => hide(rec.item, position)}
                 />
               </motion.li>

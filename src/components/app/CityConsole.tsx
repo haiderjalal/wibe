@@ -9,10 +9,10 @@ import { Toast, type ToastMessage } from "@/components/app/Toast";
 import { CATEGORIES } from "@/lib/categories";
 import { ISLAMABAD, neighborhood } from "@/lib/data";
 import { formatDay, formatMoney, formatTime } from "@/lib/format";
-import { useCatalog, useVibe, vibe } from "@/lib/store";
+import { useCatalog, useWibe, wibe } from "@/lib/store";
 import type { EventItem, EventState } from "@/lib/types";
 
-const REJECT_REASONS = ["Missing or unclear details", "Date or time looks wrong", "Venue couldn't be confirmed", "Not suitable for Vibe"];
+const REJECT_REASONS = ["Missing or unclear details", "Date or time looks wrong", "Venue couldn't be confirmed", "Not suitable for Wibe"];
 const STALE_AFTER_DAYS = 30;
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -103,7 +103,7 @@ function ReviewCard({ event, now, onDecide }: { event: EventItem; now: Date; onD
 }
 
 export function CityConsole() {
-  const { ready, submissions, log, prefs } = useVibe();
+  const { ready, submissions, log, prefs } = useWibe();
   const catalog = useCatalog();
   const [now] = useState(() => new Date());
   const [toast, setToast] = useState<ToastMessage | null>(null);
@@ -119,7 +119,7 @@ export function CityConsole() {
   const stale = cityItems.filter((i) => (now.getTime() - Date.parse(i.verifiedAt)) / 86_400_000 > STALE_AFTER_DAYS).length;
 
   const decide = (event: EventItem, to: EventState, reason?: string) => {
-    if (!vibe.transition("editor", event.id, to, reason)) return;
+    if (!wibe.transition("editor", event.id, to, reason)) return;
     const verb = { approved: "Approved", published: "Published", rejected: "Rejected", suspended: "Suspended" }[to as string] ?? "Updated";
     setToast({ id: `${event.id}-${to}`, text: `${verb} ${event.title}.` });
   };
@@ -194,7 +194,7 @@ export function CityConsole() {
           </p>
           <div className="max-h-[520px] overflow-auto rounded-[1.4rem] border border-line">
             {log.length === 0 ? (
-              <p className="p-6 text-sm text-haze">No events yet. Turn on “Help improve Vibe” in your preferences, then browse picks.</p>
+              <p className="p-6 text-sm text-haze">No events yet. Turn on “Help improve Wibe” in your preferences, then browse picks.</p>
             ) : (
               <table className="w-full text-left text-sm">
                 <thead className="sticky top-0 bg-ink-2 text-xs text-haze">
@@ -226,7 +226,7 @@ export function CityConsole() {
               type="button"
               onClick={() => {
                 if (!confirmReset) return setConfirmReset(true);
-                vibe.reset();
+                wibe.reset();
                 setConfirmReset(false);
                 setToast({ id: `reset-${Date.now()}`, text: "Demo data cleared." });
               }}

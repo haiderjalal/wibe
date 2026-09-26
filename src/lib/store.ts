@@ -12,7 +12,7 @@ import { buildCatalog, DEMO_ORG, ISLAMABAD, neighborhood } from "./data";
 import { zonedDate } from "./engine";
 import type { AnalyticsEvent, Category, EventItem, EventState, Item, Preferences } from "./types";
 
-const STORAGE_KEY = "vibe.demo.v1";
+const STORAGE_KEY = "wibe.demo.v1";
 const MAX_LOG = 200;
 
 interface State {
@@ -54,7 +54,7 @@ function load(): State {
       log: Array.isArray(parsed.log) ? parsed.log : [],
     };
   } catch (error) {
-    console.warn("Vibe demo data could not be read; starting fresh.", error);
+    console.warn("Wibe demo data could not be read; starting fresh.", error);
     state = freshState();
   }
   return state;
@@ -65,7 +65,7 @@ function set(update: (s: State) => State): void {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   } catch (error) {
-    console.warn("Vibe demo data could not be saved.", error);
+    console.warn("Wibe demo data could not be saved.", error);
   }
   listeners.forEach((l) => l());
 }
@@ -85,14 +85,14 @@ function subscribe(listener: () => void): () => void {
 }
 
 /** Store snapshot. `ready` is false during server render and hydration. */
-export function useVibe(): State & { ready: boolean } {
+export function useWibe(): State & { ready: boolean } {
   const snapshot = useSyncExternalStore(subscribe, load, () => SERVER_STATE);
   return { ...snapshot, ready: snapshot !== SERVER_STATE };
 }
 
 /** Fixtures plus partner submissions. Empty until the store is ready, so server and client markup agree. */
 export function useCatalog(): Item[] {
-  const { ready, submissions } = useVibe();
+  const { ready, submissions } = useWibe();
   return useMemo(() => {
     if (!ready) return [];
     catalog ??= buildCatalog(new Date());
@@ -152,7 +152,7 @@ export function canTransition(actor: Actor, from: EventState, to: EventState): b
 
 // ---------- actions ----------
 
-export const vibe = {
+export const wibe = {
   setPrefs(prefs: Preferences): void {
     set((s) => ({ ...s, prefs }));
   },

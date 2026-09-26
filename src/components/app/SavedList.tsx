@@ -10,10 +10,10 @@ import { SaveButton } from "@/components/app/SaveButton";
 import { CATEGORIES } from "@/lib/categories";
 import { ISLAMABAD, neighborhood } from "@/lib/data";
 import { formatMoney, formatWhen } from "@/lib/format";
-import { useCatalog, useVibe, vibe } from "@/lib/store";
+import { useCatalog, useWibe, wibe } from "@/lib/store";
 
 export function SavedList() {
-  const { ready, saves } = useVibe();
+  const { ready, saves } = useWibe();
   const catalog = useCatalog();
   const [now] = useState(() => new Date());
 
@@ -60,7 +60,7 @@ export function SavedList() {
                     {formatWhen(item, ISLAMABAD, now)} · <span className="text-sodium">{formatMoney(item.priceMinor, ISLAMABAD)}</span>
                   </p>
                 </div>
-                <SaveButton saved onToggle={() => vibe.toggleSave(item.id)} label={item.title} className="relative z-10" />
+                <SaveButton saved onToggle={() => wibe.toggleSave(item.id)} label={item.title} className="relative z-10" />
               </motion.li>
             ))}
           </AnimatePresence>

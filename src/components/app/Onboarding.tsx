@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { CATEGORIES, CATEGORY_IDS } from "@/lib/categories";
 import { CITIES, ISLAMABAD } from "@/lib/data";
 import { formatMoney } from "@/lib/format";
-import { useVibe, vibe } from "@/lib/store";
+import { useWibe, wibe } from "@/lib/store";
 import type { Category, Preferences } from "@/lib/types";
 
 const BUDGETS = [100_000, 250_000, 500_000, 1_000_000];
@@ -50,7 +50,7 @@ function Chip({ selected, onClick, children }: { selected: boolean; onClick: () 
 
 export function Onboarding() {
   const router = useRouter();
-  const { prefs: saved, ready } = useVibe();
+  const { prefs: saved, ready } = useWibe();
   const [draft, setDraft] = useState<Preferences | null>(null);
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState(1);
@@ -72,7 +72,7 @@ export function Onboarding() {
       return;
     }
     if (delta > 0 && step === STEPS.length - 1) {
-      vibe.setPrefs(prefs);
+      wibe.setPrefs(prefs);
       router.push("/discover");
       return;
     }
@@ -110,7 +110,7 @@ export function Onboarding() {
                 <legend className="font-display text-4xl font-bold leading-tight" style={{ fontVariationSettings: '"wdth" 105' }}>
                   Where are you going out?
                 </legend>
-                <p className="mt-3 text-haze">Vibe is piloting in one city first. More follow once it works well here.</p>
+                <p className="mt-3 text-haze">Wibe is piloting in one city first. More follow once it works well here.</p>
                 <div className="mt-8 grid gap-3 sm:grid-cols-2">
                   <button
                     type="button"
@@ -218,7 +218,7 @@ export function Onboarding() {
                     className="mt-1 size-5 shrink-0 accent-[var(--color-sodium)]"
                   />
                   <span>
-                    <span className="block font-semibold">Help improve Vibe</span>
+                    <span className="block font-semibold">Help improve Wibe</span>
                     <span className="mt-1 block text-sm text-haze">
                       Record which picks you see, save and hide on this device so the team can measure what works. Optional, off unless you tick it.
                     </span>

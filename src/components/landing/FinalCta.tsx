@@ -17,7 +17,7 @@ export function FinalCta() {
           <h2 id="cta-title" className="font-display text-[clamp(2.6rem,7vw,6.4rem)] font-extrabold leading-[0.9]" style={{ fontVariationSettings: '"wdth" 115' }}>
             <WordsRise text="Tonight's plan is a few taps away." />
           </h2>
-          <p className="mx-auto mt-6 max-w-md text-lg text-haze">Free for members. Add Vibe to your home screen, no app store needed.</p>
+          <p className="mx-auto mt-6 max-w-md text-lg text-haze">Free for members. Add Wibe to your home screen, no app store needed.</p>
           <Link href="/onboarding" className="btn btn-primary group mt-10 !px-7 !py-4 text-base">
             Set your vibe
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
@@ -28,7 +28,7 @@ export function FinalCta() {
         <div className="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-center md:justify-between">
           <div className="space-y-2">
             <Logo />
-            <p className="max-w-sm text-sm text-haze">Vibe is a working name. This pilot prototype runs on fictional listings and stores everything on your device.</p>
+            <p className="max-w-sm text-sm text-haze">This pilot prototype runs on fictional listings and stores everything on your device.</p>
           </div>
           <nav aria-label="Footer" className="flex flex-wrap gap-x-8 gap-y-3 text-sm text-haze">
             <Link href="/discover" className="hover:text-jasmine">Discover</Link>

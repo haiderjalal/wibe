@@ -10,7 +10,7 @@ import { Toast, type ToastMessage } from "@/components/app/Toast";
 import { CATEGORIES, CATEGORY_IDS } from "@/lib/categories";
 import { DEMO_ORG, ISLAMABAD, neighborhood } from "@/lib/data";
 import { formatDay, formatMoney, formatTime } from "@/lib/format";
-import { useCatalog, useVibe, vibe, type FieldErrors, type SubmissionInput } from "@/lib/store";
+import { useCatalog, useWibe, wibe, type FieldErrors, type SubmissionInput } from "@/lib/store";
 import type { EventItem } from "@/lib/types";
 
 const EMPTY_FORM: SubmissionInput = {
@@ -45,7 +45,7 @@ function Field({ label, error, hint, children }: { label: string; error?: string
 }
 
 export function PartnerPortal() {
-  const { ready, submissions } = useVibe();
+  const { ready, submissions } = useWibe();
   const catalog = useCatalog();
   const [form, setForm] = useState<SubmissionInput>(EMPTY_FORM);
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -69,7 +69,7 @@ export function PartnerPortal() {
   };
 
   const save = (submit: boolean) => {
-    const result = vibe.saveSubmission(form, submit);
+    const result = wibe.saveSubmission(form, submit);
     if (!result.ok) {
       setErrors(result.errors);
       return;
@@ -80,7 +80,7 @@ export function PartnerPortal() {
   };
 
   const submitDraft = (e: EventItem) => {
-    if (vibe.transition("partner", e.id, "submitted")) setToast({ id: `${e.id}-sub`, text: `${e.title} submitted for review.` });
+    if (wibe.transition("partner", e.id, "submitted")) setToast({ id: `${e.id}-sub`, text: `${e.title} submitted for review.` });
   };
 
   const today = new Intl.DateTimeFormat("en-CA", { timeZone: ISLAMABAD.timezone }).format(now);

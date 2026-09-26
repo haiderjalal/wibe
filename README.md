@@ -1,4 +1,4 @@
-# Vibe — pilot web app (PWA)
+# Wibe — pilot web app (PWA)
 
 Islamabad-first discovery app: members set preferences and get place and event picks that explain themselves; partners submit events; a city editor reviews and publishes them. The product and engineering plans live in [`docs/`](docs/).
 
