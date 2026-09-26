@@ -109,7 +109,7 @@ export function Hero() {
             Wibe picks places, events and hosted experiences around you, and shows exactly why each one made your list.
           </p>
           <div className="flex flex-wrap gap-3">
-            <Link href="/onboarding" className="btn btn-primary group">
+            <Link href="/welcome" className="btn btn-primary group">
               Set your vibe
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
             </Link>

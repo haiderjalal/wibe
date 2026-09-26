@@ -52,14 +52,15 @@ function Chip({ selected, onClick, children }: { selected: boolean; onClick: () 
 
 export function Onboarding() {
   const router = useRouter();
-  const { prefs: saved, ready } = useWibe();
+  const { prefs: saved, ready, vibe } = useWibe();
   const [draft, setDraft] = useState<Preferences | null>(null);
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState(1);
   const [error, setError] = useState("");
 
   if (!ready) return <div className="mx-auto h-[60vh] max-w-2xl animate-pulse rounded-3xl bg-ridge/40" aria-busy="true" />;
-  const prefs = draft ?? saved ?? DEFAULTS;
+  // New members start with the interests their vibe check suggested.
+  const prefs = draft ?? saved ?? { ...DEFAULTS, interests: vibe?.result.interests ?? [] };
   const city = CITIES.find((c) => c.id === prefs.cityId) ?? ISLAMABAD;
   const update = (patch: Partial<Preferences>) => setDraft({ ...prefs, ...patch });
 

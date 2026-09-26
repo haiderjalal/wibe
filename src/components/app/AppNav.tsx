@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Bookmark, Compass, LayoutDashboard, Store } from "lucide-react";
+import { Bookmark, Compass, LayoutDashboard, Store, UserRound } from "lucide-react";
 import { motion } from "motion/react";
 
 import { Logo } from "@/components/Logo";
@@ -12,9 +12,10 @@ const TABS = [
   { href: "/saved", label: "Saved", icon: Bookmark },
   { href: "/partner", label: "Partner", icon: Store },
   { href: "/console", label: "Console", icon: LayoutDashboard },
+  { href: "/profile", label: "Profile", icon: UserRound },
 ];
 
-export function AppNav() {
+export function AppNav({ account }: { account: { name: string; avatarUrl: string | null } | null }) {
   const pathname = usePathname();
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
@@ -38,12 +39,28 @@ export function AppNav() {
               </Link>
             ))}
           </nav>
-          <span className="eyebrow rounded-full border border-line px-3 py-1.5 !text-[0.6rem]">Demo · fictional data</span>
+          <div className="flex items-center gap-3">
+            <span className="eyebrow hidden rounded-full border border-line px-3 py-1.5 !text-[0.6rem] sm:inline-block">Demo · fictional data</span>
+            {account ? (
+              <Link href="/profile" aria-label="Your profile" className="relative grid size-9 place-items-center overflow-hidden rounded-full border border-line bg-ridge-2 text-sm font-semibold">
+                {account.avatarUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element -- remote Google avatar, tiny and already sized by the provider
+                  <img src={account.avatarUrl} alt="" className="size-full object-cover" referrerPolicy="no-referrer" />
+                ) : (
+                  account.name.slice(0, 1).toUpperCase()
+                )}
+              </Link>
+            ) : (
+              <Link href="/signin" className="btn btn-ghost !px-4 !py-1.5 text-sm">
+                Sign in
+              </Link>
+            )}
+          </div>
         </div>
       </header>
 
       <nav aria-label="App" className="glass fixed inset-x-3 bottom-3 z-40 rounded-3xl md:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
-        <ul className="grid grid-cols-4">
+        <ul className="grid grid-cols-5">
           {TABS.map(({ href, label, icon: Icon }) => (
             <li key={href}>
               <Link

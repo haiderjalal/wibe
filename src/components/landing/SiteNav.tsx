@@ -41,9 +41,14 @@ export function SiteNav() {
             </li>
           ))}
         </ul>
-        <Link href="/discover" className="btn btn-primary !px-4 !py-2 text-sm">
-          Open the app
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link href="/signin" className="hidden rounded-full px-4 py-2 text-sm text-haze transition-colors hover:text-jasmine sm:block">
+            Sign in
+          </Link>
+          <Link href="/discover" className="btn btn-primary !px-4 !py-2 text-sm">
+            Open the app
+          </Link>
+        </div>
       </nav>
     </motion.header>
   );

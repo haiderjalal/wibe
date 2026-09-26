@@ -11,6 +11,7 @@ import { CATEGORY_IDS } from "./categories";
 import { buildCatalog, DEMO_ORG, ISLAMABAD, neighborhood } from "./data";
 import { zonedDate } from "./engine";
 import type { AnalyticsEvent, Category, EventItem, EventState, Item, Preferences } from "./types";
+import type { Answers, VibeResult } from "./vibe";
 
 const STORAGE_KEY = "wibe.demo.v1";
 const MAX_LOG = 200;
@@ -22,9 +23,11 @@ interface State {
   submissions: EventItem[];
   log: AnalyticsEvent[];
   anonId: string;
+  /** Guest copy of the vibe interview; signed-in members also have it on their profile. */
+  vibe: { answers: Answers; result: VibeResult } | null;
 }
 
-const SERVER_STATE: State = { prefs: null, saves: [], hidden: [], submissions: [], log: [], anonId: "" };
+const SERVER_STATE: State = { prefs: null, saves: [], hidden: [], submissions: [], log: [], anonId: "", vibe: null };
 
 let state: State = SERVER_STATE;
 let loaded = false;
@@ -155,6 +158,10 @@ export function canTransition(actor: Actor, from: EventState, to: EventState): b
 export const wibe = {
   setPrefs(prefs: Preferences): void {
     set((s) => ({ ...s, prefs }));
+  },
+
+  setVibe(vibe: State["vibe"]): void {
+    set((s) => ({ ...s, vibe }));
   },
 
   toggleSave(id: string, context: { requestId?: string; position?: number } = {}): void {

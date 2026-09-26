@@ -26,7 +26,7 @@ export function FinalCta() {
             <WordsRise text="Tonight’s plan is a few taps" /> <span className="accent text-sodium">away.</span>
           </h2>
           <p className="mx-auto mt-6 max-w-md text-lg text-haze">Free for members. Add Wibe to your home screen, no app store needed.</p>
-          <Link href="/onboarding" className="btn btn-primary group mt-10 !px-7 !py-4 text-base">
+          <Link href="/welcome" className="btn btn-primary group mt-10 !px-7 !py-4 text-base">
             Set your vibe
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
           </Link>

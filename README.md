@@ -10,6 +10,12 @@ This build implements the blueprint's **first vertical slice** (§16) as a front
 4. A city editor approves, then publishes or rejects it (`/console`). The published event shows up in members' picks.
 5. Consented impressions, saves and hides are logged using the blueprint §11 event envelope and shown in the console.
 
+## Sign-in and vibe check
+
+- `/signin`: Continue with Google, or email + a 6-digit code (Supabase Auth). Setup steps: [`docs/auth-setup.md`](docs/auth-setup.md).
+- `/welcome`: a one-minute, photo-led vibe check. Answers become a vibe type (shown as a coloured ring and name border) and tags the member can hide. Scoring is deterministic and tested (`src/lib/vibe.ts`); it never asks about orientation, gender, religion or health.
+- `/profile`: the member's private profile. Without Supabase keys everything still works in guest mode, stored on the device.
+
 ## Run it
 
 ```bash
@@ -46,7 +52,7 @@ public/sw.js             offline caching
 
 ## Not built yet (by design)
 
-- **No backend.** Everything is stored in the browser. `src/lib/store.ts` is the seam where `/v1` API calls go. The partner/editor role checks there are a demo of the policy, **not authorization**.
-- No authentication, payments, tickets, check-in, ledger, moderation cases or notifications. The docs schedule these for the transaction pilot, and the "Get tickets" button stays disabled until then.
+- **Only accounts and profiles are server-side (Supabase).** Listings, saves and submissions are still stored in the browser. `src/lib/store.ts` is the seam where `/v1` API calls go. The partner/editor role checks there are a demo of the policy, **not authorization**.
+- No payments, tickets, check-in, ledger, moderation cases or notifications. The docs schedule these for the transaction pilot, and the "Get tickets" button stays disabled until then.
 - Pricing on the landing page shows the plan's pilot **test** prices.
 - All listings and organizations are fictional.
