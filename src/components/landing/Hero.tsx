@@ -86,7 +86,7 @@ export function Hero() {
               {line.map((word, wi) => (
                 <span key={word} className="inline-block overflow-hidden pb-[0.06em] align-bottom">
                   <motion.span
-                    className={`inline-block ${word === "plans." ? "bg-gradient-to-r from-sodium to-dusk bg-clip-text text-transparent" : ""}`}
+                    className={`inline-block ${word === "plans." ? "accent bg-gradient-to-r from-sodium to-dusk bg-clip-text pr-[0.08em] text-transparent" : ""}`}
                     initial={reduced ? false : { y: "110%" }}
                     animate={{ y: 0 }}
                     transition={{ duration: 1, delay: 0.3 + (li * 3 + wi) * 0.07, ease: EASE }}

@@ -10,6 +10,7 @@ import { SaveButton } from "@/components/app/SaveButton";
 import { CATEGORIES } from "@/lib/categories";
 import { CITIES, ISLAMABAD, neighborhood } from "@/lib/data";
 import { isOpenAt, recommend } from "@/lib/engine";
+import { photoFor } from "@/lib/media";
 import { formatDay, formatMoney, formatTime, formatVerified, reasonLabel } from "@/lib/format";
 import { useCatalog, useWibe, wibe } from "@/lib/store";
 import type { City, Item } from "@/lib/types";
@@ -37,7 +38,7 @@ function ParallaxCover({ item }: { item: Item }) {
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
   return (
     <motion.div ref={ref} style={{ scale, y }}>
-      <Cover category={item.category} className="h-64 md:h-96" iconClassName="size-72 md:size-[26rem]" />
+      <Cover category={item.category} photo={photoFor(item)} sizes="(min-width: 1152px) 1152px, 100vw" priority className="h-72 md:h-[30rem]" iconClassName="size-72 md:size-[26rem]" />
     </motion.div>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, ArrowRight, Check, MapPin } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
@@ -8,6 +9,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { CATEGORIES, CATEGORY_IDS } from "@/lib/categories";
 import { CITIES, ISLAMABAD } from "@/lib/data";
 import { formatMoney } from "@/lib/format";
+import { PHOTOS } from "@/lib/media";
 import { useWibe, wibe } from "@/lib/store";
 import type { Category, Preferences } from "@/lib/types";
 
@@ -115,10 +117,20 @@ export function Onboarding() {
                   <button
                     type="button"
                     aria-pressed
-                    className="sector-grid relative overflow-hidden rounded-3xl border border-sodium bg-sodium/10 p-6 text-left"
+                    className="relative min-h-44 overflow-hidden rounded-3xl border border-sodium p-6 text-left"
                   >
-                    <span className="eyebrow !text-sodium">Live now</span>
-                    <span className="mt-6 block font-display text-3xl font-bold">Islamabad</span>
+                    <Image
+                      src={PHOTOS["faisal-night"].src}
+                      alt=""
+                      fill
+                      sizes="(min-width: 640px) 320px, 100vw"
+                      placeholder="blur"
+                      blurDataURL={PHOTOS["faisal-night"].blurDataURL}
+                      className="object-cover object-[50%_35%]"
+                    />
+                    <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-ink/10" />
+                    <span className="eyebrow relative !text-sodium">Live now</span>
+                    <span className="relative mt-16 block font-display text-3xl font-bold">Islamabad</span>
                     <Check className="absolute right-5 top-5 size-5 text-sodium" aria-hidden />
                   </button>
                   <div className="rounded-3xl border border-dashed border-line p-6 text-haze" aria-disabled>

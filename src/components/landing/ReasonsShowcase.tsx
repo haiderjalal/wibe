@@ -6,6 +6,7 @@ import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } fro
 
 import { Cover } from "@/components/Cover";
 import { Reveal, WordsRise } from "@/components/motion/Reveal";
+import { PHOTOS } from "@/lib/media";
 
 const REASONS = ["You're into live music", "Starts tonight at 9:00 pm", "2.4 km from F-7"];
 
@@ -36,7 +37,7 @@ export function ReasonsShowcase() {
         <div>
           <p className="eyebrow mb-4">Explainable picks</p>
           <h2 id="reasons-title" className="font-display text-[clamp(2.2rem,5vw,4.2rem)] font-bold leading-[0.95]" style={{ fontVariationSettings: '"wdth" 105' }}>
-            <WordsRise text="Every pick shows its working." />
+            <WordsRise text="Every pick shows its" /> <span className="accent text-sodium">working.</span>
           </h2>
           <Reveal delay={0.2}>
             <p className="mt-6 max-w-md text-lg leading-relaxed text-haze">
@@ -71,7 +72,7 @@ export function ReasonsShowcase() {
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="relative w-full max-w-[420px] rounded-[2rem] border border-line bg-ridge shadow-[0_50px_100px_-30px_rgb(0_0_0/0.7)]"
           >
-            <Cover category="live_music" sector="F-6" className="h-52 rounded-t-[2rem]">
+            <Cover category="live_music" photo={PHOTOS["jazz-stage"]} sizes="420px" sector="F-6" className="h-60 rounded-t-[2rem]">
               <span className="absolute right-4 top-4 rounded-full bg-ink/60 px-2.5 py-1 font-mono text-[0.65rem] uppercase tracking-[0.14em] backdrop-blur">
                 Event
               </span>

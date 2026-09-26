@@ -10,6 +10,7 @@ import { SaveButton } from "@/components/app/SaveButton";
 import { CATEGORIES } from "@/lib/categories";
 import { ISLAMABAD, neighborhood } from "@/lib/data";
 import { formatMoney, formatWhen } from "@/lib/format";
+import { photoFor } from "@/lib/media";
 import { useCatalog, useWibe, wibe } from "@/lib/store";
 
 export function SavedList() {
@@ -48,7 +49,7 @@ export function SavedList() {
                 exit={{ opacity: 0, x: -60 }}
                 className="relative flex items-center gap-4 rounded-[1.4rem] border border-line bg-ridge/60 p-3 pr-4 transition-colors hover:border-haze/40"
               >
-                <Cover category={item.category} className="size-20 shrink-0 rounded-2xl sm:size-24" iconClassName="size-16" />
+                <Cover category={item.category} photo={photoFor(item)} sizes="96px" className="size-20 shrink-0 rounded-2xl sm:size-24" iconClassName="size-16" />
                 <div className="min-w-0 flex-1">
                   <p className="eyebrow !text-[0.6rem]">
                     {CATEGORIES[item.category].label} · {neighborhood(ISLAMABAD, item.neighborhoodId).name}

@@ -20,6 +20,7 @@
   --font-display: var(--font-anybody);
   --font-sans: var(--font-figtree);
   --font-mono: var(--font-plex-mono);
+  --font-serif: var(--font-instrument);
 
   --animate-marquee: marquee 38s linear infinite;
   --animate-marquee-reverse: marquee 44s linear infinite reverse;
@@ -66,6 +67,32 @@ body {
 }
 
 @layer components {
+  /* Italic editorial accent inside display headings. */
+  .accent {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-variation-settings: normal;
+    letter-spacing: -0.01em;
+  }
+
+  /* Fixed film grain over everything: adds tactile, print-like depth to flat dark surfaces. */
+  .grain {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    opacity: 0.07;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Hairline in sodium, fading at both ends. */
+  .hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgb(255 181 71 / 0.5), transparent);
+  }
+
   /* Utility face for sector codes, times and system labels. */
   .eyebrow {
     font-family: var(--font-mono);

@@ -5,6 +5,7 @@ import { Check, EyeOff, Heart, MapPin } from "lucide-react";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll, useSpring, useTransform } from "motion/react";
 
 import { Cover } from "@/components/Cover";
+import { PHOTOS, type PhotoName } from "@/lib/media";
 
 // A real sequence, so the steps are numbered.
 const STEPS = [
@@ -72,10 +73,10 @@ function ScreenPrefs() {
   );
 }
 
-function MiniPick({ title, sector, category, reasons }: { title: string; sector: string; category: "live_music" | "cafe" | "outdoors"; reasons: string[] }) {
+function MiniPick({ title, sector, category, photo, reasons }: { title: string; sector: string; category: "live_music" | "cafe" | "outdoors"; photo: PhotoName; reasons: string[] }) {
   return (
     <div className="overflow-hidden rounded-2xl border border-line bg-ridge">
-      <Cover category={category} sector={sector} className="h-20" iconClassName="size-20" />
+      <Cover category={category} photo={PHOTOS[photo]} sizes="280px" sector={sector} className="h-24" iconClassName="size-20" />
       <div className="space-y-2 p-3">
         <p className="text-sm font-semibold">{title}</p>
         <div className="flex flex-wrap gap-1.5">
@@ -100,8 +101,8 @@ function ScreenPicks() {
   return (
     <div className="flex h-full flex-col gap-3 p-4">
       <p className="eyebrow !text-[0.6rem]">Tonight · 3 picks</p>
-      <MiniPick title="Monsoon Jazz Night" sector="F-6" category="live_music" reasons={["You're into live music", "Starts at 9:00 pm", "2.4 km away"]} />
-      <MiniPick title="Chaiwala & Chess Club" sector="F-7" category="cafe" reasons={["Open when you want to go", "350 m away"]} />
+      <MiniPick title="Monsoon Jazz Night" sector="F-6" category="live_music" photo="jazz-stage" reasons={["You're into live music", "Starts at 9:00 pm", "2.4 km away"]} />
+      <MiniPick title="Chaiwala & Chess Club" sector="F-7" category="cafe" photo="chai-pour" reasons={["Open when you want to go", "350 m away"]} />
     </div>
   );
 }

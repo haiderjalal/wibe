@@ -34,7 +34,7 @@ export function Reveal({
 export function WordsRise({ text, className, delay = 0 }: { text: string; className?: string; delay?: number }) {
   return (
     <span className={className}>
-      {text.split(" ").map((word, i) => (
+      {text.split(" ").map((word, i, words) => (
         <span key={`${word}-${i}`} className="inline-block overflow-hidden pb-[0.08em] align-bottom">
           <motion.span
             className="inline-block"
@@ -44,7 +44,7 @@ export function WordsRise({ text, className, delay = 0 }: { text: string; classN
             transition={{ duration: 0.8, delay: delay + i * 0.05, ease: EASE }}
           >
             {word}
-            {" "}
+            {i < words.length - 1 && " "}
           </motion.span>
         </span>
       ))}

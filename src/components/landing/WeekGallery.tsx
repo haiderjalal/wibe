@@ -9,6 +9,7 @@ import { Cover } from "@/components/Cover";
 import { CATEGORIES } from "@/lib/categories";
 import { featuredEvents, ISLAMABAD } from "@/lib/data";
 import { formatMoney } from "@/lib/format";
+import { photoFor } from "@/lib/media";
 
 const EVENTS = featuredEvents();
 const GAP = 24;
@@ -37,7 +38,7 @@ function GalleryCard({
         href={`/discover/${event.id}`}
         className="group block overflow-hidden rounded-[1.75rem] border border-line bg-ridge transition-colors hover:border-sodium/60"
       >
-        <Cover category={event.category} sector={event.sector} className="aspect-[4/3.2]" iconClassName="size-56">
+        <Cover category={event.category} photo={photoFor(event)} sizes="(min-width: 640px) 400px, 78vw" sector={event.sector} className="aspect-[4/4.4]" iconClassName="size-56">
           <span className="absolute bottom-4 left-4 rounded-full bg-ink/60 px-3 py-1 text-xs font-semibold backdrop-blur">{event.whenLabel}</span>
           <span className="absolute right-4 top-4 grid size-9 place-items-center rounded-full bg-ink/50 opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
             <ArrowUpRight className="size-4" aria-hidden />

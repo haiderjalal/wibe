@@ -8,6 +8,7 @@ import { Cover } from "@/components/Cover";
 import { SaveButton } from "@/components/app/SaveButton";
 import { neighborhood } from "@/lib/data";
 import { formatDistance, formatMoney, formatWhen, reasonLabel } from "@/lib/format";
+import { photoFor } from "@/lib/media";
 import type { City, Preferences, Recommendation } from "@/lib/types";
 
 const LOW_STOCK = 10;
@@ -34,7 +35,7 @@ export function ItemCard({
 
   return (
     <article className="group relative flex h-full flex-col overflow-hidden rounded-[1.6rem] border border-line bg-ridge/70 transition-[border-color,transform] duration-500 hover:-translate-y-1 hover:border-haze/40">
-      <Cover category={item.category} sector={neighborhood(city, item.neighborhoodId).name} className="h-44" iconClassName="size-36">
+      <Cover category={item.category} photo={photoFor(item)} sector={neighborhood(city, item.neighborhoodId).name} className="h-52" iconClassName="size-36">
         <span className="absolute bottom-3 left-4 rounded-full bg-ink/60 px-2.5 py-1 font-mono text-[0.62rem] uppercase tracking-[0.14em] backdrop-blur">
           {item.type === "event" ? "Event" : "Place"}
         </span>

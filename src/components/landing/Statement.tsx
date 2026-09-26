@@ -11,7 +11,7 @@ function Word({ word, progress, range }: { word: string; progress: MotionValue<n
   const opacity = useTransform(progress, range, [0.14, 1]);
   const bare = word.replace(/[^a-z]/gi, "").toLowerCase();
   return (
-    <motion.span style={{ opacity }} className={HIGHLIGHT.has(bare) ? "text-sodium" : undefined}>
+    <motion.span style={{ opacity }} className={HIGHLIGHT.has(bare) ? "accent text-sodium" : undefined}>
       {word}{" "}
     </motion.span>
   );

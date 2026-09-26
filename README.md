@@ -23,6 +23,10 @@ npm run build
 
 The service worker only registers in production builds (`npm run build && npm start`).
 
+## Photography
+
+Photos in `public/images/` are from Unsplash (free Unsplash License), chosen to fit an Islamabad audience (no alcohol imagery), recompressed with mozjpeg and served through `next/image` as AVIF/WebP with blur-up placeholders. `src/lib/media.ts` holds alt text, credits and which photo each listing uses; photographers are credited at `/credits`. Swap in brand shoots by replacing files and updating that catalog.
+
 ## Stack
 
 Next.js 16 (App Router, React Compiler) · TypeScript strict · Tailwind CSS v4 · Motion (scroll/layout animation) · Lenis (smooth scroll) · React Three Fiber + drei (3D hero) · Zod (submission validation) · lucide-react.

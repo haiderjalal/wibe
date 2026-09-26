@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 
+import { CinematicBand } from "@/components/landing/CinematicBand";
 import { FinalCta } from "@/components/landing/FinalCta";
 import { Hero } from "@/components/landing/Hero";
 import { HowItWorks } from "@/components/landing/HowItWorks";
 import { Marquee } from "@/components/landing/Marquee";
+import { Moments } from "@/components/landing/Moments";
 import { Partners } from "@/components/landing/Partners";
 import { Pricing } from "@/components/landing/Pricing";
 import { Principles } from "@/components/landing/Principles";
@@ -24,9 +26,11 @@ export default function HomePage() {
       <main>
         <Hero />
         <Marquee />
+        <CinematicBand />
         <Statement />
         <HowItWorks />
         <ReasonsShowcase />
+        <Moments />
         <WeekGallery />
         <Partners />
         <Principles />

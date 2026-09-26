@@ -1,11 +1,13 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ChartColumn, Lock, ScanLine } from "lucide-react";
 import { motion, useScroll, useSpring, useTransform, type MotionValue } from "motion/react";
 
 import { Reveal, WordsRise } from "@/components/motion/Reveal";
+import { PHOTOS } from "@/lib/media";
 
 // The listing lifecycle from the blueprint, in order.
 const FLOW = [
@@ -51,6 +53,29 @@ function FlowNode({ index, progress, state, note }: { index: number; progress: M
   );
 }
 
+const STRIP = PHOTOS["long-table"];
+
+/** Wide supper-table photo that drifts inside its frame as it crosses the viewport. */
+function PhotoStrip() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
+  return (
+    <div ref={ref} className="relative mt-24 aspect-[16/10] overflow-hidden rounded-[2rem] md:aspect-[21/9]">
+      <motion.div className="absolute inset-x-0 -inset-y-[14%]" style={{ y }}>
+        <Image src={STRIP.src} alt={STRIP.alt} fill sizes="(min-width: 1280px) 1280px, 100vw" placeholder="blur" blurDataURL={STRIP.blurDataURL} className="object-cover" />
+      </motion.div>
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-ink/90 via-ink/40 to-transparent" />
+      <div className="absolute inset-y-0 left-0 flex max-w-lg flex-col justify-end p-7 md:p-12">
+        <p className="eyebrow !text-sodium">Supper clubs · studios · courts · stages</p>
+        <p className="mt-3 font-display text-[clamp(1.6rem,3.4vw,2.8rem)] font-bold leading-tight" style={{ fontVariationSettings: '"wdth" 100' }}>
+          Listed by the people who <span className="accent text-sodium">run them.</span>
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export function Partners() {
   const flow = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: flow, offset: ["start 0.85", "center 0.45"] });
@@ -83,7 +108,9 @@ export function Partners() {
           </ol>
         </div>
 
-        <div className="mt-24 grid gap-5 md:grid-cols-3">
+        <PhotoStrip />
+
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
           {FEATURES.map(({ icon: Icon, title, body }, i) => (
             <Reveal key={title} delay={i * 0.1}>
               <div className="group h-full rounded-[1.75rem] border border-line bg-ridge/60 p-7 transition-[transform,border-color] duration-500 hover:-translate-y-1.5 hover:border-sodium/50">
